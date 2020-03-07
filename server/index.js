@@ -1,50 +1,53 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 
-const dotenv = require('dotenv');
-dotenv.config({ path: '.env.dev' });
+const dotenv = require("dotenv");
+dotenv.config({ path: ".env.dev" });
 
-const payment = require('./payment');
-const product = require('./price.json');
-const file = require('./file');
+const payment = require("./payment");
+const product = require("./price.json");
+const file = require("./file");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('/', (req, res) => res.send('API server up and running'));
+app.get("/", (req, res) => res.send("API server up and running"));
 
-app.get('/api/status', (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
+app.get("/api/status", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
   res.send(JSON.stringify({ status: `working` }));
 });
 
-app.post('/api/payment/create', async (req, res) => {
+app.post("/api/payment/create", async (req, res) => {
   const productId = req.body.productId;
   const currency = req.body.currency;
-  // get amount from our database
-  const amount = product.prices.find(price => {
-    return price.currency == currency;
-  }).amount;
-  const total = req.body.quantity * amount;
 
-  const clientSecret = await payment.create(total, currency, productId);
+  try {
+    // get amount from our database
+    const amount = product.prices.find(price => {
+      return price.currency == currency;
+    }).amount;
+    const total = req.body.quantity * amount;
+    const clientSecret = await payment.create(total, currency, productId);
 
-  res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify({ secret: clientSecret }));
+    res.setHeader("Content-Type", "application/json");
+    res.send(JSON.stringify({ secret: clientSecret }));
+  } catch (e) {
+    res.setHeader("Content-Type", "application/json");
+    res.status(400).send(JSON.stringify({ error: e.message }));
+  }
 });
 
-app.get('/api/product/:id', async (req, res) => {
-  const productId = req.params.id;
-  // TODO: support multiple product.
+app.get("/api/product/:id", async (req, res) => {
   // currently we don't use productId as we only have one product.
-  res.setHeader('Content-Type', 'application/json');
+  const productId = req.params.id;
+  res.setHeader("Content-Type", "application/json");
   res.send(JSON.stringify(product));
 });
 
-app.post('/webhook/stripe', async (req, res) => {
+app.post("/webhook/stripe", async (req, res) => {
   // verify webhook signature is coming froms stripe
-  /*
-  const sig = req.headers['stripe-signature'];
+  const sig = req.headers["stripe-signature"];
   try {
     event = stripe.webhooks.constructEvent(
       req.body,
@@ -54,13 +57,12 @@ app.post('/webhook/stripe', async (req, res) => {
   } catch (err) {
     res.status(400).send(`Webhook Error: ${err.message}`);
   }
-  */
 
   let event = req.body;
 
   // handle stripe webhook event
   switch (event.type) {
-    case 'payment_intent.succeeded':
+    case "payment_intent.succeeded":
       const paymentIntent = event.data.object;
 
       try {
