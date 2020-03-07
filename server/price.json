@@ -1,0 +1,14 @@
+{
+    "product_id": "248",
+    "product_name": "Kobe Braynt Patch",
+    "prices": [
+        {
+            "currency": "usd",
+            "amount": 1000
+        },
+        {
+            "currency": "hkd",
+            "amount": 2000
+        }
+    ]
+}
