@@ -21,11 +21,15 @@ export default function CheckoutForm(props) {
       return;
     }
 
-    const result = await stripe.confirmCardPayment(`${props.clientSecret}`, {
-      payment_method: {
-        card: elements.getElement(CardElement)
-      }
-    });
+    let result = {};
+
+    if (props.selectedPaymentMethod == "card") {
+      result = await stripe.confirmCardPayment(props.clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement)
+        }
+      });
+    }
 
     if (result.error) {
       // Show error to your customer (e.g., insufficient funds)
@@ -49,7 +53,7 @@ export default function CheckoutForm(props) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="Card">
-        <CardElement />
+        {props.selectedPaymentMethod == "card" ? <CardElement /> : <div></div>}
       </div>
       {error != null ? (
         <div className="errors" role="alert">

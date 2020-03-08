@@ -13,7 +13,7 @@ export default function ProductForm(props) {
     return options;
   };
 
-  const handlePayClick = async paymentMethod => {
+  const handlePayClick = async selectedPaymentMethod => {
     // create payment intent
     const response = await fetch("/api/payment/create", {
       method: "POST",
@@ -24,7 +24,7 @@ export default function ProductForm(props) {
         productId: props.selectedProductId,
         currency: props.selectedCurrency,
         quantity: props.selectedQuantity,
-        paymentMethod: paymentMethod
+        paymentMethod: selectedPaymentMethod
       })
     });
 
@@ -32,10 +32,12 @@ export default function ProductForm(props) {
       const data = await response.json();
       setError(null);
       props.updatePaymentIntentClientSecret(data.secret);
+      props.updatePaymentMethod(selectedPaymentMethod);
     } else {
       const data = await response.json();
       setError(data.error);
       props.updatePaymentIntentClientSecret(null);
+      props.updatePaymentMethod(null);
     }
   };
 
@@ -73,8 +75,6 @@ export default function ProductForm(props) {
         <p>
           with
           <button onClick={() => handlePayClick("card")}>card</button>
-          <button onClick={() => handlePayClick("wechat")}>wechat</button>
-          <button onClick={() => handlePayClick("alipay")}>alipay</button>
         </p>
       </div>
       {error != null ? (

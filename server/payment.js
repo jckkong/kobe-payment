@@ -3,16 +3,14 @@
 const dotenv = require("dotenv");
 dotenv.config({ path: "../.env.dev" });
 
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
-
-const stripe = require("stripe")(stripeSecretKey);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 async function create(amount, currency, productId) {
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency,
-      metadata: { productId: productId, integration_check: "accept_a_payment" }
+      metadata: { productId: productId }
     });
 
     const clientSecret = paymentIntent.client_secret;

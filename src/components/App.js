@@ -22,6 +22,7 @@ class App extends React.Component {
       selectedQuantity: 1,
       // default to usd
       selectedCurrency: "usd",
+      selectedPaymentMethod: null,
       product: {},
       // default to 1
       currencyAvailable: [],
@@ -87,6 +88,14 @@ class App extends React.Component {
     });
   };
 
+  updatePaymentMethod = async selectedPaymentMethod => {
+    if (selectedPaymentMethod != this.state.selectedPaymentMethod) {
+      this.setState({
+        selectedPaymentMethod: selectedPaymentMethod
+      });
+    }
+  };
+
   updatePaymentIntentClientSecret = async paymentIntentClientSecret => {
     if (paymentIntentClientSecret != this.state.paymentIntentClientSecret) {
       this.setState({
@@ -128,6 +137,7 @@ class App extends React.Component {
               updatePaymentIntentClientSecret={
                 this.updatePaymentIntentClientSecret
               }
+              updatePaymentMethod={this.updatePaymentMethod}
             ></ProductForm>
           </div>
         ) : (
@@ -144,6 +154,7 @@ class App extends React.Component {
               </p>
               <CheckoutForm
                 handleSuccessPayment={this.handleSuccessPayment}
+                selectedPaymentMethod={this.state.selectedPaymentMethod}
                 clientSecret={this.state.paymentIntentClientSecret}
               />
             </Elements>
