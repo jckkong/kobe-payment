@@ -111,7 +111,7 @@ class App extends React.Component {
 
   // set new payment method to state
   updatePaymentMethod = async selectedPaymentMethod => {
-    if (selectedPaymentMethod != this.state.selectedPaymentMethod) {
+    if (selectedPaymentMethod !== this.state.selectedPaymentMethod) {
       this.setState({
         selectedPaymentMethod: selectedPaymentMethod
       });
@@ -120,9 +120,9 @@ class App extends React.Component {
 
   // update payment intent client secret when it is recieved from the server
   updatePaymentIntentClientSecret = async paymentIntentClientSecret => {
-    if (paymentIntentClientSecret != this.state.paymentIntentClientSecret) {
+    if (paymentIntentClientSecret !== this.state.paymentIntentClientSecret) {
       this.setState({
-        step: paymentIntentClientSecret == null ? 0 : 1,
+        step: paymentIntentClientSecret === null ? 0 : 1,
         paymentIntentClientSecret: paymentIntentClientSecret
       });
     }
@@ -147,10 +147,12 @@ class App extends React.Component {
     return (
       <div className="Container">
         <div className="Header">
-          <h1>Remembering Kobe 🐐</h1>
+          <h1>
+            Remembering Kobe <span>🐐</span>
+          </h1>
           <i>All proceeds goes to the Mamba Sports Foundation</i>
         </div>
-        {this.state.step == 0 ? (
+        {this.state.step === 0 ? (
           <div className="Content">
             <ProductForm
               product={this.state.product}
@@ -171,7 +173,7 @@ class App extends React.Component {
         ) : (
           <div></div>
         )}
-        {this.state.step == 1 ? (
+        {this.state.step === 1 ? (
           <div className="Content">
             <Elements stripe={stripePromise}>
               <p>Quantity: {this.state.selectedQuantity}</p>
@@ -193,7 +195,7 @@ class App extends React.Component {
         ) : (
           <div></div>
         )}
-        {this.state.step == 2 ? (
+        {this.state.step === 2 ? (
           <div className="Content">Success</div>
         ) : (
           <div></div>

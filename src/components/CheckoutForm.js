@@ -27,7 +27,7 @@ export default function CheckoutForm(props) {
 
     let result = {};
 
-    if (props.selectedPaymentMethod == "card") {
+    if (props.selectedPaymentMethod === "card") {
       result = await stripe.confirmCardPayment(props.clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement)

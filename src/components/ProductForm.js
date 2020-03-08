@@ -13,7 +13,9 @@ export default function ProductForm(props) {
   const createQuantityOptions = (min, max) => {
     let options = [];
     for (let i = min; i < max; i++) {
-      options.push(<option selected={i == props.selectedQuantity}>{i}</option>);
+      options.push(
+        <option selected={i === props.selectedQuantity}>{i}</option>
+      );
     }
     return options;
   };
@@ -61,7 +63,9 @@ export default function ProductForm(props) {
         )}
       </p>
       <img src="patch.jpeg" width="200px" />
-      <p>Free Shipping 🌎</p>
+      <p>
+        Free Shipping <span>🌎</span>
+      </p>
       <p>
         Currency:
         <select onChange={props.handleCurrencyChange}>
