@@ -21,7 +21,7 @@ class App extends React.Component {
       // default to 1
       selectedQuantity: 1,
       // default to usd
-      selectedCurrency: "usd",
+      selectedCurrency: "hkd",
       selectedPaymentMethod: null,
       product: {},
       // default to 1
@@ -32,6 +32,15 @@ class App extends React.Component {
       step: 0
     };
   }
+
+  formatPrice = (amount, currency) => {
+    var formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: currency
+    });
+
+    return formatter.format(amount / 100);
+  };
 
   mapProductPriceByCurrency = product => {
     if ("prices" in product) {
@@ -132,6 +141,7 @@ class App extends React.Component {
               selectedProductId={this.state.productId}
               selectedCurrency={this.state.selectedCurrency}
               selectedQuantity={this.state.selectedQuantity}
+              formatPrice={this.formatPrice}
               handleQuantityChange={this.handleQuantityChange}
               handleCurrencyChange={this.handleCurrencyChange}
               updatePaymentIntentClientSecret={
@@ -149,8 +159,11 @@ class App extends React.Component {
               <p>Quantity: {this.state.selectedQuantity}</p>
               <p>
                 Total:{" "}
-                {this.state.selectedQuantity *
-                  this.state.priceMap[this.state.selectedCurrency]}
+                {this.formatPrice(
+                  this.state.selectedQuantity *
+                    this.state.priceMap[this.state.selectedCurrency],
+                  this.state.selectedCurrency
+                )}
               </p>
               <CheckoutForm
                 handleSuccessPayment={this.handleSuccessPayment}

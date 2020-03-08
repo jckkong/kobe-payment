@@ -45,7 +45,10 @@ export default function ProductForm(props) {
     <div>
       <p>
         {props.product.product_name || ""} -{" "}
-        {props.priceMap[props.selectedCurrency]}
+        {props.formatPrice(
+          props.priceMap[props.selectedCurrency],
+          props.selectedCurrency
+        )}
       </p>
       <img src="patch.jpeg" width="200px" />
       <p>Free Shipping 🌎</p>
@@ -70,7 +73,11 @@ export default function ProductForm(props) {
       </p>
       <div className="PriceBox">
         <p>
-          Pay {props.selectedQuantity * props.priceMap[props.selectedCurrency]}{" "}
+          Pay{" "}
+          {props.formatPrice(
+            props.selectedQuantity * props.priceMap[props.selectedCurrency],
+            props.selectedCurrency
+          )}
         </p>
         <p>
           with

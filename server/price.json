@@ -3,12 +3,516 @@
     "product_name": "Kobe Bryant Patch",
     "prices": [
         {
-            "currency": "usd",
-            "amount": 1000
+            "amount": 4771,
+            "currency": "aed"
         },
         {
-            "currency": "hkd",
-            "amount": 2000
+            "amount": 98983,
+            "currency": "afn"
+        },
+        {
+            "amount": 140779,
+            "currency": "all"
+        },
+        {
+            "amount": 623286,
+            "currency": "amd"
+        },
+        {
+            "amount": 2326,
+            "currency": "ang"
+        },
+        {
+            "amount": 638963,
+            "currency": "aoa"
+        },
+        {
+            "amount": 81098,
+            "currency": "ars"
+        },
+        {
+            "amount": 1953,
+            "currency": "aud"
+        },
+        {
+            "amount": 2338,
+            "currency": "awg"
+        },
+        {
+            "amount": 2208,
+            "currency": "azn"
+        },
+        {
+            "amount": 2243,
+            "currency": "bam"
+        },
+        {
+            "amount": 2624,
+            "currency": "bbd"
+        },
+        {
+            "amount": 110377,
+            "currency": "bdt"
+        },
+        {
+            "amount": 2246,
+            "currency": "bgn"
+        },
+        {
+            "amount": 2459656,
+            "currency": "bif"
+        },
+        {
+            "amount": 1299,
+            "currency": "bmd"
+        },
+        {
+            "amount": 1790,
+            "currency": "bnd"
+        },
+        {
+            "amount": 8961,
+            "currency": "bob"
+        },
+        {
+            "amount": 6010,
+            "currency": "brl"
+        },
+        {
+            "amount": 1299,
+            "currency": "bsd"
+        },
+        {
+            "amount": 14490,
+            "currency": "bwp"
+        },
+        {
+            "amount": 2619,
+            "currency": "bzd"
+        },
+        {
+            "amount": 1744,
+            "currency": "cad"
+        },
+        {
+            "amount": 2209599,
+            "currency": "cdf"
+        },
+        {
+            "amount": 1217,
+            "currency": "chf"
+        },
+        {
+            "amount": 1073753,
+            "currency": "clp"
+        },
+        {
+            "amount": 9004,
+            "currency": "cny"
+        },
+        {
+            "amount": 4661890,
+            "currency": "cop"
+        },
+        {
+            "amount": 744741,
+            "currency": "crc"
+        },
+        {
+            "amount": 128438,
+            "currency": "cve"
+        },
+        {
+            "amount": 29222,
+            "currency": "czk"
+        },
+        {
+            "amount": 230858,
+            "currency": "djf"
+        },
+        {
+            "amount": 8596,
+            "currency": "dkk"
+        },
+        {
+            "amount": 69886,
+            "currency": "dop"
+        },
+        {
+            "amount": 154314,
+            "currency": "dzd"
+        },
+        {
+            "amount": 20315,
+            "currency": "egp"
+        },
+        {
+            "amount": 42087,
+            "currency": "etb"
+        },
+        {
+            "amount": 1150,
+            "currency": "eur"
+        },
+        {
+            "amount": 2877,
+            "currency": "fjd"
+        },
+        {
+            "amount": 995,
+            "currency": "gbp"
+        },
+        {
+            "amount": 3624,
+            "currency": "gel"
+        },
+        {
+            "amount": 1055,
+            "currency": "gip"
+        },
+        {
+            "amount": 66184,
+            "currency": "gmd"
+        },
+        {
+            "amount": 12243075,
+            "currency": "gnf"
+        },
+        {
+            "amount": 9982,
+            "currency": "gtq"
+        },
+        {
+            "amount": 272122,
+            "currency": "gyd"
+        },
+        {
+            "amount": 10096,
+            "currency": "hkd"
+        },
+        {
+            "amount": 32345,
+            "currency": "hnl"
+        },
+        {
+            "amount": 8649,
+            "currency": "hrk"
+        },
+        {
+            "amount": 122296,
+            "currency": "htg"
+        },
+        {
+            "amount": 385906,
+            "currency": "huf"
+        },
+        {
+            "amount": 18518868,
+            "currency": "idr"
+        },
+        {
+            "amount": 4528,
+            "currency": "ils"
+        },
+        {
+            "amount": 96132,
+            "currency": "inr"
+        },
+        {
+            "amount": 164791,
+            "currency": "isk"
+        },
+        {
+            "amount": 175262,
+            "currency": "jmd"
+        },
+        {
+            "amount": 136804,
+            "currency": "jpy"
+        },
+        {
+            "amount": 133407,
+            "currency": "kes"
+        },
+        {
+            "amount": 90735,
+            "currency": "kgs"
+        },
+        {
+            "amount": 5293425,
+            "currency": "khr"
+        },
+        {
+            "amount": 566169,
+            "currency": "kmf"
+        },
+        {
+            "amount": 1544251,
+            "currency": "krw"
+        },
+        {
+            "amount": 1083,
+            "currency": "kyd"
+        },
+        {
+            "amount": 498048,
+            "currency": "kzt"
+        },
+        {
+            "amount": 11561100,
+            "currency": "lak"
+        },
+        {
+            "amount": 1964693,
+            "currency": "lbp"
+        },
+        {
+            "amount": 236461,
+            "currency": "lkr"
+        },
+        {
+            "amount": 256812,
+            "currency": "lrd"
+        },
+        {
+            "amount": 20368,
+            "currency": "lsl"
+        },
+        {
+            "amount": 12327,
+            "currency": "mad"
+        },
+        {
+            "amount": 22648,
+            "currency": "mdl"
+        },
+        {
+            "amount": 4747845,
+            "currency": "mga"
+        },
+        {
+            "amount": 70674,
+            "currency": "mkd"
+        },
+        {
+            "amount": 1770942,
+            "currency": "mmk"
+        },
+        {
+            "amount": 10404,
+            "currency": "mop"
+        },
+        {
+            "amount": 49426,
+            "currency": "mur"
+        },
+        {
+            "amount": 20134,
+            "currency": "mvr"
+        },
+        {
+            "amount": 958012,
+            "currency": "mwk"
+        },
+        {
+            "amount": 26123,
+            "currency": "mxn"
+        },
+        {
+            "amount": 5419,
+            "currency": "myr"
+        },
+        {
+            "amount": 85155,
+            "currency": "mzn"
+        },
+        {
+            "amount": 20368,
+            "currency": "nad"
+        },
+        {
+            "amount": 474784,
+            "currency": "ngn"
+        },
+        {
+            "amount": 44490,
+            "currency": "nio"
+        },
+        {
+            "amount": 12020,
+            "currency": "nok"
+        },
+        {
+            "amount": 153170,
+            "currency": "npr"
+        },
+        {
+            "amount": 2044,
+            "currency": "nzd"
+        },
+        {
+            "amount": 1299,
+            "currency": "pab"
+        },
+        {
+            "amount": 4510,
+            "currency": "pen"
+        },
+        {
+            "amount": 4426,
+            "currency": "pgk"
+        },
+        {
+            "amount": 65690,
+            "currency": "php"
+        },
+        {
+            "amount": 200435,
+            "currency": "pkr"
+        },
+        {
+            "amount": 4946,
+            "currency": "pln"
+        },
+        {
+            "amount": 8494496,
+            "currency": "pyg"
+        },
+        {
+            "amount": 4729,
+            "currency": "qar"
+        },
+        {
+            "amount": 5532,
+            "currency": "ron"
+        },
+        {
+            "amount": 135297,
+            "currency": "rsd"
+        },
+        {
+            "amount": 89059,
+            "currency": "rub"
+        },
+        {
+            "amount": 1214565,
+            "currency": "rwf"
+        },
+        {
+            "amount": 4874,
+            "currency": "sar"
+        },
+        {
+            "amount": 10784,
+            "currency": "sbd"
+        },
+        {
+            "amount": 17803,
+            "currency": "scr"
+        },
+        {
+            "amount": 12203,
+            "currency": "sek"
+        },
+        {
+            "amount": 1790,
+            "currency": "sgd"
+        },
+        {
+            "amount": 12616537,
+            "currency": "sll"
+        },
+        {
+            "amount": 759915,
+            "currency": "sos"
+        },
+        {
+            "amount": 9687,
+            "currency": "srd"
+        },
+        {
+            "amount": 20368,
+            "currency": "szl"
+        },
+        {
+            "amount": 40801,
+            "currency": "thb"
+        },
+        {
+            "amount": 12583,
+            "currency": "tjs"
+        },
+        {
+            "amount": 3010,
+            "currency": "top"
+        },
+        {
+            "amount": 7914,
+            "currency": "try"
+        },
+        {
+            "amount": 8782,
+            "currency": "ttd"
+        },
+        {
+            "amount": 38860,
+            "currency": "twd"
+        },
+        {
+            "amount": 2994324,
+            "currency": "tzs"
+        },
+        {
+            "amount": 32457,
+            "currency": "uah"
+        },
+        {
+            "amount": 4819573,
+            "currency": "ugx"
+        },
+        {
+            "amount": 1299,
+            "currency": "usd"
+        },
+        {
+            "amount": 52166,
+            "currency": "uyu"
+        },
+        {
+            "amount": 12353490,
+            "currency": "uzs"
+        },
+        {
+            "amount": 30143944,
+            "currency": "vnd"
+        },
+        {
+            "amount": 752359,
+            "currency": "xaf"
+        },
+        {
+            "amount": 3510,
+            "currency": "xcd"
+        },
+        {
+            "amount": 758616,
+            "currency": "xof"
+        },
+        {
+            "amount": 138148,
+            "currency": "xpf"
+        },
+        {
+            "amount": 325204,
+            "currency": "yer"
+        },
+        {
+            "amount": 20358,
+            "currency": "zar"
+        },
+        {
+            "amount": 19802,
+            "currency": "zmw"
         }
     ]
 }
