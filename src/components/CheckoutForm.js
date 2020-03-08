@@ -57,7 +57,7 @@ export default function CheckoutForm(props) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="Card">
-        {props.selectedPaymentMethod == "card" ? <CardElement /> : <div></div>}
+        {props.selectedPaymentMethod === "card" ? <CardElement /> : <div></div>}
       </div>
       {error != null ? (
         <div className="errors" role="alert">

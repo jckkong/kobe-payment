@@ -148,7 +148,10 @@ class App extends React.Component {
       <div className="Container">
         <div className="Header">
           <h1>
-            Remembering Kobe <span>🐐</span>
+            Remembering Kobe{" "}
+            <span role="img" aria-label="Goat">
+              🐐
+            </span>
           </h1>
           <i>All proceeds goes to the Mamba Sports Foundation</i>
         </div>

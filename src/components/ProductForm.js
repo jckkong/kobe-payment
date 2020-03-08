@@ -62,9 +62,12 @@ export default function ProductForm(props) {
           props.selectedCurrency
         )}
       </p>
-      <img src="patch.jpeg" width="200px" />
+      <img alt="kobe patch" src="patch.jpeg" width="200px" />
       <p>
-        Free Shipping <span>🌎</span>
+        Free Shipping{" "}
+        <span role="img" aria-label="Earth">
+          🌎
+        </span>
       </p>
       <p>
         Currency:
