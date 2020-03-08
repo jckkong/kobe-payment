@@ -66,8 +66,10 @@ app.post(
   async (req, res) => {
     // verify webhook signature is coming from stripe
     const sig = req.headers["stripe-signature"];
+    let event;
+
     try {
-      const event = stripe.webhooks.constructEvent(
+      event = stripe.webhooks.constructEvent(
         req.body,
         sig,
         process.env.STRIPE_WEBHOOK_SECRET
@@ -76,8 +78,6 @@ app.post(
       console.error(err);
       res.status(400).send(`Webhook Error: ${err.message}`);
     }
-
-    let event = req.body;
 
     // handle stripe webhook event
     switch (event.type) {
