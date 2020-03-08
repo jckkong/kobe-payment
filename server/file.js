@@ -1,14 +1,15 @@
-const fs = require('fs');
-const lockfile = require('proper-lockfile');
+const fs = require("fs");
+const lockfile = require("proper-lockfile");
 
+// appends a line into a file
 async function append(line, path) {
   try {
     // check if file exists. if it cant be opened. then create the file.
-    fs.closeSync(fs.openSync(path, 'a'));
-    // lock the file, for append
+    fs.closeSync(fs.openSync(path, "a"));
+    // lock the file, for append operation
     const release = await lockfile.lock(path);
     // 'a' flag stands for 'append'
-    const log = fs.createWriteStream(path, { flags: 'a' });
+    const log = fs.createWriteStream(path, { flags: "a" });
 
     // write line
     log.write(`${line} \n`);
@@ -29,5 +30,5 @@ async function append(line, path) {
 }
 
 module.exports = {
-  append,
+  append
 };

@@ -8,13 +8,19 @@ import "whatwg-fetch";
 import "./App.css";
 
 const stripePublicKey = "pk_test_IiDh2KlTKugUyS9iAbXJc44O00NXgQZ9cR";
-
 const stripePromise = loadStripe(stripePublicKey);
 
+/*
+ * App displays the Home page. It has 3 stages.
+ * 1st stage - display the Product Information
+ * 2nd stage - display the Checkout Page
+ * 3rd stage - display the Success Page
+ */
 class App extends React.Component {
   constructor(props) {
     super(props);
 
+    // initial state
     this.state = {
       // hardcode the product we are displaying. we only have one product.
       selectedProductId: "248",
@@ -22,40 +28,20 @@ class App extends React.Component {
       selectedQuantity: 1,
       // default to usd
       selectedCurrency: "hkd",
+
       selectedPaymentMethod: null,
+
       product: {},
-      // default to 1
       currencyAvailable: [],
       priceMap: [],
       paymentIntentClientSecret: null,
 
+      // default to the 1st stage which is the product info
       step: 0
     };
   }
 
-  formatPrice = (amount, currency) => {
-    var formatter = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: currency
-    });
-
-    return formatter.format(amount / 100);
-  };
-
-  mapProductPriceByCurrency = product => {
-    if ("prices" in product) {
-      let priceMap = {};
-      product.prices.forEach((value, index) => {
-        const currency = product.prices[index].currency;
-        const amount = product.prices[index].amount;
-        priceMap[currency] = amount;
-      });
-      return priceMap;
-    } else {
-      return {};
-    }
-  };
-
+  // fetch the necessary information on initial launch
   componentWillMount = async () => {
     try {
       // get the product to be displayed
@@ -70,9 +56,7 @@ class App extends React.Component {
       );
 
       const product = await response.json();
-      // get a list of currency this product supports.
-      // a better way of doing this is to assume the store supports a fixed amount of
-      // currency and we fetch all the currencies only once
+      // get the price map of this product for faster lookup
       const priceMap = this.mapProductPriceByCurrency(product);
 
       this.setState({
@@ -85,18 +69,47 @@ class App extends React.Component {
     }
   };
 
+  // format the price based on currency. truncates the price to 2 decimal places
+  formatPrice = (amount, currency) => {
+    var formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: currency
+    });
+
+    return formatter.format(amount / 100);
+  };
+
+  // creates a price map for the selectedProduct
+  // priceMap[currency] = amount
+  mapProductPriceByCurrency = product => {
+    if ("prices" in product) {
+      let priceMap = {};
+      product.prices.forEach((value, index) => {
+        const currency = product.prices[index].currency;
+        const amount = product.prices[index].amount;
+        priceMap[currency] = amount;
+      });
+      return priceMap;
+    } else {
+      return {};
+    }
+  };
+
+  // set new quantity to state
   handleQuantityChange = event => {
     this.setState({
       selectedQuantity: event.target.value
     });
   };
 
+  // set new currency to state
   handleCurrencyChange = event => {
     this.setState({
       selectedCurrency: event.target.value
     });
   };
 
+  // set new payment method to state
   updatePaymentMethod = async selectedPaymentMethod => {
     if (selectedPaymentMethod != this.state.selectedPaymentMethod) {
       this.setState({
@@ -105,6 +118,7 @@ class App extends React.Component {
     }
   };
 
+  // update payment intent client secret when it is recieved from the server
   updatePaymentIntentClientSecret = async paymentIntentClientSecret => {
     if (paymentIntentClientSecret != this.state.paymentIntentClientSecret) {
       this.setState({
@@ -114,14 +128,18 @@ class App extends React.Component {
     }
   };
 
+  // proceed to next step = 2 after successful payment
   handleSuccessPayment = () => {
     this.setState({
       step: 2,
-      // default to 1
+      // default back to 1
       selectedQuantity: 1,
-      // default to usd
+      // default back to usd
       selectedCurrency: "usd",
-      paymentIntentClientSecret: null
+      // reset paymentIntentClientSecret
+      paymentIntentClientSecret: null,
+      // reset selectedPaymentMethod
+      selectedPaymentMethod: null
     });
   };
 

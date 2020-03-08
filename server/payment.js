@@ -1,10 +1,9 @@
-// Set your secret key. Remember to switch to your live secret key in production!
-// See your keys here: https://dashboard.stripe.com/account/apikeys
 const dotenv = require("dotenv");
 dotenv.config({ path: "../.env.dev" });
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
+// create payment intent from stripe
 async function create(amount, currency, productId) {
   try {
     const paymentIntent = await stripe.paymentIntents.create({
@@ -13,8 +12,8 @@ async function create(amount, currency, productId) {
       metadata: { productId: productId }
     });
 
+    // return back the clientSecret to client
     const clientSecret = paymentIntent.client_secret;
-
     return clientSecret;
   } catch (e) {
     console.error(e);

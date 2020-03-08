@@ -2,9 +2,14 @@ import React from "react";
 import { useState } from "react";
 import "./App.css";
 
+/*
+ * ProductForm displays the Product Title, Image, Price and Total.
+ * It allows the user to change the Quantity and the Currency.
+ */
 export default function ProductForm(props) {
   const [error, setError] = useState(null);
 
+  // populate the select options tag for quantity
   const createQuantityOptions = (min, max) => {
     let options = [];
     for (let i = min; i < max; i++) {
@@ -13,6 +18,8 @@ export default function ProductForm(props) {
     return options;
   };
 
+  // handle the pay button click
+  // this will call api/payment/create to create PaymentIntent
   const handlePayClick = async selectedPaymentMethod => {
     // create payment intent
     const response = await fetch("/api/payment/create", {
@@ -34,6 +41,9 @@ export default function ProductForm(props) {
       props.updatePaymentIntentClientSecret(data.secret);
       props.updatePaymentMethod(selectedPaymentMethod);
     } else {
+      // if payment intent creation failed
+      // display the error message from the server
+      // reset the paymentIntentClientSecret and paymentMethod
       const data = await response.json();
       setError(data.error);
       props.updatePaymentIntentClientSecret(null);

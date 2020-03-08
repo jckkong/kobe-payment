@@ -11,7 +11,10 @@ const product = require("./price.json");
 const file = require("./file");
 
 app.use(express.urlencoded({ extended: true }));
+
 app.use((req, res, next) => {
+  // for webhook/stripe, we need the raw body to validate
+  // webhook sigature. hence skip express.json()
   if (req.originalUrl === "/webhook/stripe") {
     next();
   } else {
@@ -21,11 +24,13 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res) => res.send("API server up and running"));
 
+// get api server status
 app.get("/api/status", (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.send(JSON.stringify({ status: `working` }));
 });
 
+// create a payment intent on Stripe
 app.post("/api/payment/create", async (req, res) => {
   const productId = req.body.productId;
   const currency = req.body.currency;
@@ -46,6 +51,7 @@ app.post("/api/payment/create", async (req, res) => {
   }
 });
 
+// get product pricing
 app.get("/api/product/:id", async (req, res) => {
   // currently we don't use productId as we only have one product.
   const productId = req.params.id;
@@ -53,11 +59,12 @@ app.get("/api/product/:id", async (req, res) => {
   res.send(JSON.stringify(product));
 });
 
+// handle stripe webook request
 app.post(
   "/webhook/stripe",
   express.raw({ type: "application/json" }),
   async (req, res) => {
-    // verify webhook signature is coming froms stripe
+    // verify webhook signature is coming from stripe
     const sig = req.headers["stripe-signature"];
     try {
       const event = stripe.webhooks.constructEvent(
@@ -75,9 +82,9 @@ app.post(
     // handle stripe webhook event
     switch (event.type) {
       case "payment_intent.succeeded":
-        const paymentIntent = event.data.object;
-
         try {
+          const paymentIntent = event.data.object;
+
           // append the paymentIntent result into a log file
           await file.append(
             `${paymentIntent.created},${paymentIntent.id},${paymentIntent.status}`,
@@ -87,7 +94,8 @@ app.post(
           res.status(200).send({ recieved: true });
         } catch (err) {
           console.error(err);
-          // if we are unable to append a line to the file. send a 400 response so stripe retry
+          // if we are unable to append a line to the file,
+          // send a 400 response so stripe can retry sending the webook
           res.status(400).send(`Webhook Error: Unable to append to log`);
         }
         break;

@@ -4,6 +4,10 @@ import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 
 import "./App.css";
 
+/*
+ * CheckoutForm displays the Stripe CardElement and calls the
+ * confirmCardPayment() to submit the payment
+ */
 export default function CheckoutForm(props) {
   const [error, setError] = useState(null);
   // react hook to load stripe and elements logic
