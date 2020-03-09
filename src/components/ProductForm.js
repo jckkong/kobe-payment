@@ -13,9 +13,7 @@ export default function ProductForm(props) {
   const createQuantityOptions = (min, max) => {
     let options = [];
     for (let i = min; i < max; i++) {
-      options.push(
-        <option selected={i === props.selectedQuantity}>{i}</option>
-      );
+      options.push(<option key={i}>{i}</option>);
     }
     return options;
   };
@@ -45,11 +43,10 @@ export default function ProductForm(props) {
     } else {
       // if payment intent creation failed
       // display the error message from the server
-      // reset the paymentIntentClientSecret and paymentMethod
+      // reset the paymentIntentClientSecret
       const data = await response.json();
       setError(data.error);
       props.updatePaymentIntentClientSecret(null);
-      props.updatePaymentMethod(null);
     }
   };
 
@@ -71,10 +68,13 @@ export default function ProductForm(props) {
       </p>
       <p>
         Currency:
-        <select onChange={props.handleCurrencyChange}>
+        <select
+          value={props.selectedCurrency}
+          onChange={props.handleCurrencyChange}
+        >
           {props.currencyAvailable.map(value => {
             return (
-              <option selected={value === props.selectedCurrency} key={value}>
+              <option key={value} value={value}>
                 {value}
               </option>
             );
@@ -84,7 +84,10 @@ export default function ProductForm(props) {
 
       <p>
         Quantity:
-        <select onChange={props.handleQuantityChange}>
+        <select
+          onChange={props.handleQuantityChange}
+          value={props.selectedQuantity}
+        >
           {createQuantityOptions(1, 10)}
         </select>
       </p>
