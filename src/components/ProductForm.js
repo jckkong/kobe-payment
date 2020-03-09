@@ -31,7 +31,8 @@ export default function ProductForm(props) {
         productId: props.selectedProductId,
         currency: props.selectedCurrency,
         quantity: props.selectedQuantity,
-        paymentMethod: selectedPaymentMethod
+        paymentMethod: selectedPaymentMethod,
+        idempotencyKey: props.userSession
       })
     });
 

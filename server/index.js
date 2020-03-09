@@ -34,6 +34,7 @@ app.get("/api/status", (req, res) => {
 app.post("/api/payment/create", async (req, res) => {
   const productId = req.body.productId;
   const currency = req.body.currency;
+  const idempotencyKey = req.body.idempotencyKey;
 
   try {
     // get amount from our database
@@ -41,7 +42,12 @@ app.post("/api/payment/create", async (req, res) => {
       return price.currency == currency;
     }).amount;
     const total = req.body.quantity * amount;
-    const clientSecret = await payment.create(total, currency, productId);
+    const clientSecret = await payment.create(
+      total,
+      currency,
+      productId,
+      idempotencyKey
+    );
 
     res.setHeader("Content-Type", "application/json");
     res.send(JSON.stringify({ secret: clientSecret }));

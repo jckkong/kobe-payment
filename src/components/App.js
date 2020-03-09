@@ -3,12 +3,16 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import ProductForm from "./ProductForm";
 import CheckoutForm from "./CheckoutForm";
-import "whatwg-fetch";
+import Cookies from "universal-cookie";
+import { v4 as uuidv4 } from "uuid";
 
+import "whatwg-fetch";
 import "./App.css";
 
 const stripePublicKey = "pk_test_IiDh2KlTKugUyS9iAbXJc44O00NXgQZ9cR";
 const stripePromise = loadStripe(stripePublicKey);
+
+const cookies = new Cookies();
 
 /*
  * App displays the Home page. It has 3 stages.
@@ -42,8 +46,11 @@ class App extends React.Component {
   }
 
   // fetch the necessary information on initial launch
-  componentWillMount = async () => {
+  componentDidMount = async () => {
     try {
+      // on a new load of this page, generate a new user session
+      this.generateUserSession();
+
       // get the product to be displayed
       const response = await fetch(
         `/api/product/${this.state.selectedProductId}`,
@@ -68,6 +75,21 @@ class App extends React.Component {
       throw e;
     }
   };
+
+  // generate a new user session. used for idempotency key
+  generateUserSession() {
+    cookies.set("session", uuidv4(), { path: "/" });
+  }
+
+  // get user session
+  getUserSession() {
+    return cookies.get("session");
+  }
+
+  // remove user session
+  removeUserSession() {
+    cookies.remove("session");
+  }
 
   // format the price based on currency. truncates the price to 2 decimal places
   formatPrice = (amount, currency) => {
@@ -130,6 +152,9 @@ class App extends React.Component {
 
   // proceed to next step = 2 after successful payment
   handleSuccessPayment = () => {
+    // remove user session after success payment.
+    this.removeUserSession();
+
     this.setState({
       step: 2,
       // default back to 1
@@ -171,6 +196,7 @@ class App extends React.Component {
                 this.updatePaymentIntentClientSecret
               }
               updatePaymentMethod={this.updatePaymentMethod}
+              userSession={this.getUserSession()}
             ></ProductForm>
           </div>
         ) : (
