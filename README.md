@@ -28,4 +28,6 @@ I am a Hong Kong seller selling Kobe Patch. I am trying to reach a global set of
 
    To enable webhook, add the ngrok URL https://xxxxxxxx.ngrok.io/webhook/stripe in Stripe Dashboard - https://dashboard.stripe.com/test/webhooks
 
+   To use stripe-cli, follow the instruction - https://stripe.com/docs/webhooks/test#install
+
 6. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
